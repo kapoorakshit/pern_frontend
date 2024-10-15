@@ -1,0 +1,94 @@
+
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+}
+
+.modal.open {
+    display: block; /* Show the modal */
+}
+
+.modal-content {
+    background-color: #ffffff; /* White background */
+    margin: 10% auto; /* Centered vertically and horizontally */
+    padding: 30px;
+    border: 1px solid #ccc; /* Light border */
+    width: 90%; /* Width of the modal */
+    max-width: 500px; /* Maximum width */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.close {
+    color: #aaa; /* Light gray */
+    float: right; /* Float right */
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000; /* Black on hover */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h2 {
+    text-align: center; /* Centered title */
+    color: #333; /* Dark gray color */
+    margin-bottom: 20px; /* Spacing below the title */
+}
+
+input[type="text"],
+textarea,
+input[type="datetime-local"] {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside inputs */
+    margin: 10px 0; /* Margin around inputs */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    font-size: 16px; /* Font size */
+    transition: border-color 0.3s ease; /* Transition for border color */
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="datetime-local"]:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Remove outline */
+}
+
+textarea {
+    resize: none; /* Disable resizing */
+    height: 80px; /* Fixed height for the textarea */
+}
+
+.save-task-button {
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 12px 20px; /* Padding */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animation */
+    width: 100%; /* Full width */
+}
+
+.save-task-button:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-2px); 
+}
+
+.save-task-button:focus {
+    outline: none; 
+}

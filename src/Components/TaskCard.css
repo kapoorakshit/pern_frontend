@@ -1,0 +1,33 @@
+/* TaskBoard.css or a separate CSS file */
+.task-card {
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.task-card:hover {
+    background-color: #c8e6c9; /* Slightly darker green on hover */
+}
+
+.task-card-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px; /* Space between text and buttons */
+}
+
+.task-button {
+    background-color: #4caf50; /* Solid green background */
+    color: white;
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 15px; /* Increased padding */
+    cursor: pointer;
+    font-size: 14px; /* Slightly larger font size */
+}
+
+/* Remove hover effect styles */
+.task-button-update {
+    background-color: #ffa500; /* Orange for update */
+}
+
+.task-button-delete {
+    background-color: #f44336; /* Red for delete */
+}

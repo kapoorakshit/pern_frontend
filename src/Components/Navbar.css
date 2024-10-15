@@ -1,0 +1,75 @@
+/* General Navbar Styles */
+.navbar {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between left and right side */
+    align-items: center; /* Center items vertically */
+    background-color: #4caf50; /* Green background */
+    padding: 15px 30px; /* Padding for spacing */
+    position: relative; /* Position relative for absolute elements */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  /* Logo Styles */
+  .leftSide {
+    display: flex; /* Flex layout for left side */
+    align-items: center; /* Center items vertically */
+  }
+  
+  .leftSide img {
+    height: 50px; /* Adjust logo height */
+    margin-right: 20px; /* Space between logo and text */
+  }
+  
+  /* Right Side Styles */
+  .rightSide {
+    display: flex; /* Flex layout for right side */
+    align-items: center; /* Center items vertically */
+  }
+  
+  /* Button Styles */
+  button {
+    background-color: transparent; /* Transparent background */
+    color: white; /* White text color */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 18px; /* Font size */
+    padding: 10px 15px; /* Padding for buttons */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+    margin-left: 15px; /* Space between buttons */
+  }
+  
+  button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly darken background on hover */
+    color: #4caf50; /* Change text color on hover */
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column; /* Stack items on smaller screens */
+      align-items: flex-start; /* Align items to the left */
+    }
+  
+    .leftSide,
+    .rightSide {
+      width: 100%; /* Full width on smaller screens */
+      justify-content: space-between; /* Space between items */
+    }
+  }
+  
+  .hiddenLinks {
+    display: none; /* Hidden by default, can be toggled if needed */
+  }
+  
+  /* Show hidden links when navbar is open */
+  #open {
+    display: flex; /* Flex layout for open state */
+    flex-direction: column; /* Stack links vertically */
+    position: absolute; /* Position absolutely for dropdown effect */
+    top: 70px; /* Position below the navbar */
+    left: 0; /* Align to left */
+    background-color: #4caf50; /* Match background color */
+    width: 100%; /* Full width */
+    z-index: 999; /* Ensure it appears above other elements */
+  }
+  
