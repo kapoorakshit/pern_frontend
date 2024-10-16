@@ -50,11 +50,14 @@ const TaskBoard: React.FC = () => {
       <>
         <button className="add-task-button" onClick={() => setModalOpen(true)}>Add Task</button>
         <div className="task-board">
+          <div style={{marginTop: '20px'}}>
           <AddTaskModal 
             isOpen={isModalOpen} 
             onClose={() => setModalOpen(false)} 
             onTaskAdded={fetchTasks} 
           />
+          </div>
+     
   
           <TaskColumn 
             title="To-Do" 

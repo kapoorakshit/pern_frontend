@@ -6,7 +6,7 @@ interface TaskCardProps {
   setActiveCard: (task: ITask | null) => void; // Added prop
   onDelete: (taskId: ITask) => void; // Added prop for delete
   onUpdate: (task: ITask) => void; // Added prop for update
-  onViewDetails: (task: ITask) => void; // Added prop for view details
+  onViewDetails: (task: ITask) => void; 
 }
 
 export const TaskCard: React.FC<TaskCardProps> = ({ task, setActiveCard, onDelete, onUpdate, onViewDetails }) => {

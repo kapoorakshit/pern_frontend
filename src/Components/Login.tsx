@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import { Link } from 'react-router-dom';
 import { login } from '../apiService/apiService';
+import axios from 'axios'; // Import axios for Google login
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -20,22 +21,27 @@ const Login: React.FC = () => {
     }),
     onSubmit: async (values) => {
       try {
-        // Call the login function from authService
-
         const response = await login(values.email, values.password);
-
-        if (response.token) { // Adjust based on your response structure
-          // Save token to local storage
+        if (response.token) {
           localStorage.setItem('token', response.token);
-          navigate('/taskboard'); 
+          navigate('/taskboard');
         }
       } catch (error) {
-        // Handle error
         console.error('Login error:', error);
-        // Optionally set an error state to display feedback to the user
       }
     },
   });
+
+  // Function to handle Google login
+  const handleGoogleLogin = async () => {
+    try {
+      // Redirect to Google login via your backend
+      window.location.href = 'http://localhost:3000/auth/google';
+      navigate('/taskboard');
+    } catch (error) {
+      console.error('Google login error:', error);
+    }
+  };
 
   return (
     <div className="login-container">
@@ -46,14 +52,14 @@ const Login: React.FC = () => {
             Email:
             <input
               type="text"
-              name="email" // Ensure the name matches initialValues
+              name="email"
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
           </label>
           {formik.touched.email && formik.errors.email && (
-            <div className="error-message">{formik.errors.email}</div>
+            <div className="error-message">Email {formik.errors.email}</div>
           )}
         </div>
         <div>
@@ -61,20 +67,27 @@ const Login: React.FC = () => {
             Password:
             <input
               type="password"
-              name="password" // Ensure the name matches initialValues
+              name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
           </label>
           {formik.touched.password && formik.errors.password && (
-            <div className="error-message">{formik.errors.password}</div>
+            <div className="error-message">Password {formik.errors.password}</div>
           )}
         </div>
         <div>
           <button type="submit">Login</button>
         </div>
       </form>
+
+      {/* Google Login Button */}
+      <div style={{marginTop: 10}}>
+        <button onClick={handleGoogleLogin} className="google-login-button">
+          Login with Google
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,18 +1,23 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { addTask } from '../apiService/apiService';
+import { updateTask } from '../apiService/apiService';
 import './AddTask.css';
 
-interface AddTaskModalProps {
+interface UpdateTaskModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onTaskAdded: () => void;
+    onTaskUpdated: () => void; 
+    taskData: {
+        id: number;
+        title: string;
+        description: string;
+        dueDate: string;
+    } | null; 
 }
 
-const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, onTaskAdded }) => {
-
-
+const UpdateTaskModal: React.FC<UpdateTaskModalProps> = ({ isOpen, onClose, onTaskUpdated, taskData }) => {
+    // Define form validation schema using Yup
     const validationSchema = Yup.object({
         title: Yup.string()
             .required('Title is required')
@@ -27,20 +32,23 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, onTaskAdde
 
     // Use Formik for handling form state and validation
     const formik = useFormik({
+        enableReinitialize: true, // Ensure formik re-initializes when taskData changes
         initialValues: {
-            title: '',
-            description: '',
-            dueDate: '',
+            title: taskData ? taskData.title : '',
+            description: taskData ? taskData.description : '',
+            dueDate: taskData ? taskData.dueDate : '',
         },
         validationSchema,
         onSubmit: async (values) => {
+            if (!taskData) return;
+
             try {
-                const createdAt = new Date().toISOString(); // Get the current date and time
-                await addTask(values.title, values.description, values.dueDate, createdAt);
-                onTaskAdded(); // Notify parent that a task was added
+                const updatedAt = new Date().toISOString(); // Get current date and time
+                await updateTask(taskData.id, values.title, values.description, values.dueDate);
+                onTaskUpdated(); // Notify parent that a task was updated
                 onClose(); // Close the modal
             } catch (error) {
-                console.error('Failed to add task:', error);
+                console.error('Failed to update task:', error);
             }
         },
     });
@@ -49,7 +57,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, onTaskAdde
         <div className={`modal ${isOpen ? 'open' : ''}`}>
             <div className="modal-content">
                 <span className="close" onClick={onClose}>&times;</span>
-                <h2>Add New Task</h2>
+                <h2>Update Task</h2>
 
                 <form onSubmit={formik.handleSubmit}>
                     <input
@@ -63,7 +71,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, onTaskAdde
                         required
                     />
                     {formik.touched.title && formik.errors.title ? (
-                        <div className="error-message">Title {formik.errors.title}</div>
+                        <div className="error-message">{formik.errors.title}</div>
                     ) : null}
 
                     <textarea
@@ -76,7 +84,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, onTaskAdde
                         required
                     />
                     {formik.touched.description && formik.errors.description ? (
-                        <div className="error-message">Description {formik.errors.description}</div>
+                        <div className="error-message">{formik.errors.description}</div>
                     ) : null}
 
                     <input
@@ -89,11 +97,11 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, onTaskAdde
                         required
                     />
                     {formik.touched.dueDate && formik.errors.dueDate ? (
-                        <div className="error-message">Date and Time {formik.errors.dueDate}</div>
+                        <div className="error-message">{formik.errors.dueDate}</div>
                     ) : null}
 
                     <button type="submit" className="save-task-button">
-                        Add Task
+                        Update Task
                     </button>
                 </form>
             </div>
@@ -101,4 +109,4 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, onTaskAdde
     );
 };
 
-export default AddTaskModal;
+export default UpdateTaskModal;
